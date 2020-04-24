@@ -9,4 +9,4 @@ netstat -aon|findstr "80" 找到端口对应的pid(4)
 
 tasklist|findstr "4"  根据pid发现哪个进程占用
 
-taskkill /f /t /im Tencentdl.exe。杀死对应的进程,如果是系统占用可以去服务管理(services.msc)停止服务.
+taskkill /f /t /im System.exe。杀死对应的进程,如果是系统占用可以去服务管理(services.msc)停止服务.

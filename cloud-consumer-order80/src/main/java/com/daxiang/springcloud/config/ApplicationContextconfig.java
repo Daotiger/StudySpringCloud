@@ -15,7 +15,7 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 public class ApplicationContextconfig {
     @Bean
-    @LoadBalanced
+    //@LoadBalanced ribbon默认的轮询负载均衡
     public RestTemplate getRestTemplate() {
         return new RestTemplate();
     }
