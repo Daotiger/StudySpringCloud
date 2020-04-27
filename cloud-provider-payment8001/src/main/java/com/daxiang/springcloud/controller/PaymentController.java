@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @ClassName : PaymentController
@@ -52,7 +53,7 @@ public class PaymentController {
 
         if (payment != null) {
 
-            return new CommonResult(200, "查询数据成功serverPort: " + serverPort, serverPort + payment);
+            return new CommonResult(200, "查询数据成功serverPort: " + serverPort, payment);
         } else {
             return new CommonResult(444, "数据不存在", null);
         }
@@ -77,6 +78,17 @@ public class PaymentController {
 
     @GetMapping("/lb")
     public String gePaymentLB() {
+        return serverPort;
+    }
+
+    @GetMapping("/feign/timeout")
+    public String paymentFeignTimeout() {
+        try {
+            log.info("延迟3S");
+            TimeUnit.SECONDS.sleep(3);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return serverPort;
     }
 }
