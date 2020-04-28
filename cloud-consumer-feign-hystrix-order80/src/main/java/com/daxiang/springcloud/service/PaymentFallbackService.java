@@ -1,25 +1,31 @@
 package com.daxiang.springcloud.service;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * @ClassName : PaymentFallbackService
- * @Description : 服务类
+ * @Description : 统一做降级处理
  * @Author : Daotiger
  * @Date: 2020-04-27 16:01
  * @Version 1.0
  */
-//@Service
-//public class PaymentFallbackService implements PaymentHystrixService {
-public class PaymentFallbackService {
+@Component
+public class PaymentFallbackService implements PaymentHystrixService {
 
-    //    @Override
-    public String paymentInfo_OK(Integer id) {
-        return "----PaymentFallbackService fall back-paymentInfo_OK,o(╥﹏╥)o";
+    @Override
+    public String paymentInfo_Ok(Integer id) {
+
+        return "----PaymentFallbackService fall back-paymentInfo_OK";
     }
 
-    //    @Override
-    public String paymentInfo_TimeOut(Integer id) {
-        return "----PaymentFallbackService fall back-paymentInfo_TimeOut,o(╥﹏╥)o";
+    @Override
+    public String paymentInfo_Timeout(Integer id) {
+
+        return "----PaymentFallbackService fall back-paymentInfo_TimeOut";
     }
+
 }

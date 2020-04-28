@@ -12,8 +12,9 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  * @Date: 2020-04-27 14:24
  * @Version 1.0
  */
-@SpringBootApplication
-@EnableEurekaClient
+@SpringBootApplication  //使能springboot
+@EnableEurekaClient     //使能eureka
+@EnableCircuitBreaker   //开启断路器功能
 public class PaymentHystrixMain8001 {
 
     public static void main(String[] args) {

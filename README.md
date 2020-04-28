@@ -31,4 +31,26 @@ com.netflix.client.ClientException: Load balancer does not have available server
     \#true 表示去检索eureka服务
     
     fetch-registry: true
+    
+##mbeanExporter重复加载报错 Error creating bean with name 'jmxMBeanExporter' defined in class path resource
 
+解决方法
+
+    - 1.spring.application.admin.enabled=false
+    - 2.程序 编辑配置 enable JMX agent 去掉勾选
+    
+   
+##基于Feign使用Hystrix
+
+解决方法
+    
+    注释掉@HystrixCommand和@DefaultProperties(defaultFallback = "payment_Global_FallBackMethod"),两种方式不能兼容.
+
+
+##HystrixCommand服务熔断
+
+    当满足一定的阈值的时候(默认10秒内超过20个请求次数)
+    当失败率达到一定的时候(默认10秒内超过50%个请求失败)
+    到达以上阈值的时候,所有请求都不会进行转发
+    一段时间之后(默认5秒),这个时候断路器是半开状态,会让其中一个请求进行转发.
+    如果成功,断路器会关闭,若失败,继续开启.重复4和5.
