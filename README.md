@@ -15,10 +15,20 @@ taskkill /f /t /im System.exe。杀死对应的进程,如果是系统占用可�
 控制层返回后结果统一,格式统一.防止出现不匹配错误.
 
 ##问题
+
 com.netflix.hystrix.exception.HystrixRuntimeException: PaymentHystrixService#paymentInfo_OK(Integer) failed and no fallback available.
 com.netflix.client.ClientException: Load balancer does not have available server for client: CLOUD-PROVIDER-HYSTRIX-PAYMENT
 
 解决方法:
 - 没有引入Eureka依赖
 - 服务名称不对
+- 消费端eureka配置错误
+
+    \#true 表示往注册中心注册自己
+    
+    register-with-eureka: true
+    
+    \#true 表示去检索eureka服务
+    
+    fetch-registry: true
 

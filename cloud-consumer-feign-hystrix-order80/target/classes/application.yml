@@ -3,9 +3,7 @@ server:
 
 eureka:
   client:
-    fetch-registry: false
+    fetch-registry: true
+    register-with-eureka: true
     service-url:
       defaultZone: http://eureka7001.com:7001/eureka/
-#feign:
-#  hystrix:
-#    enabled: true #Feign默认是未配置hystrix的
