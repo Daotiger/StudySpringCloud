@@ -54,3 +54,31 @@ com.netflix.client.ClientException: Load balancer does not have available server
     到达以上阈值的时候,所有请求都不会进行转发
     一段时间之后(默认5秒),这个时候断路器是半开状态,会让其中一个请求进行转发.
     如果成功,断路器会关闭,若失败,继续开启.重复4和5.
+    
+    
+##SpringCloud2 Hystrix无法访问/hystrix.stream解决方案
+
+    方法1.1 application.yml中添加actuator配置项
+    
+    management: 
+      endpoints: 
+        web: 
+          exposure: 
+            include: health,info,hystrix.stream #根据需求增删路径
+    
+    方法1.2 Configuration类中添加ServletRegistrationBean
+    
+    @Bean
+    public ServletRegistrationBean getServlet(){
+        HystrixMetricsStreamServlet streamServlet = new HystrixMetricsStreamServlet();
+        ServletRegistrationBean registrationBean = new ServletRegistrationBean(streamServlet);
+        registrationBean.setLoadOnStartup(1);
+        registrationBean.addUrlMappings("/actuator/hystrix.stream");
+        registrationBean.setName("HystrixMetricsStreamServlet");
+        
+        return registrationBean;
+    }
+    
+    步骤2 修改请求路径 /actuator/hystirx.stream
+    例如:http://localhost:8001/actuator/hystrix.stream
+   
